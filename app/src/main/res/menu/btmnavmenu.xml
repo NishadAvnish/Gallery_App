@@ -4,12 +4,12 @@
 
     <item
 
-        android:id="@+id/Image"
+        android:id="@+id/menuImage"
         android:icon="@drawable/image_black_24dp"
         android:title="IMAGE"
         />
     <item
-        android:id="@+id/video"
+        android:id="@+id/menuVideo"
         android:icon="@drawable/ic_video_library_black_24dp"
         android:title="VIDEO" />
 </menu>
