@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import com.example.gallery_app.R;
 import com.example.gallery_app.RecyclerView.Adapter;
 import com.example.gallery_app.RecyclerView.Databook;
+import com.example.gallery_app.storageWork.ReadStorage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static android.widget.GridLayout.HORIZONTAL;
@@ -23,7 +25,7 @@ import static android.widget.GridLayout.HORIZONTAL;
 public class ImageFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Databook> arrayList=new ArrayList<>();
-    Adapter Adapter;
+    public Adapter Adapter;
     GridLayoutManager gridLayoutManager;
     @Nullable
     @Override
@@ -42,14 +44,9 @@ public class ImageFragment extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
         Adapter=new Adapter(1,arrayList,getContext());
 
+        ReadStorage readStorage= new ReadStorage();
+        readStorage.imageFromExternal();
 
-        arrayList.add(new Databook(R.drawable.activ,"AVNISH"));
-        arrayList.add(new Databook(R.drawable.activ,"AVNISH"));
-        arrayList.add(new Databook(R.drawable.activ,"AVNISH"));
-        arrayList.add(new Databook(R.drawable.activ,"AVNISH"));
-        arrayList.add(new Databook(R.drawable.activ,"AVNISH"));
-        arrayList.add(new Databook(R.drawable.activ,"AVNISH"));
-        Adapter.notifyDataSetChanged();
 
 
         gridLayoutManager=new GridLayoutManager(getContext(),3);

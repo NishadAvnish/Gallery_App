@@ -1,13 +1,14 @@
 package com.example.gallery_app.RecyclerView;
 
-import android.widget.ImageView;
+
+import android.net.Uri;
 
 public class Databook {
-    Integer img;
+    Uri uri;
     String Name;
 
-    public Databook(Integer img, String name) {
-        this.img = img;
+    public Databook(Uri uri, String name) {
+        this.uri = uri;
         Name = name;
     }
 }

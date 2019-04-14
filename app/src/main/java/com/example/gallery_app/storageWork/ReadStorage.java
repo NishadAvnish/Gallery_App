@@ -1,10 +1,13 @@
 package com.example.gallery_app.storageWork;
 
-import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
-import android.widget.Toast;
+
+import com.example.gallery_app.Fragment.ImageFragment;
+import com.example.gallery_app.RecyclerView.Databook;
 
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 
 public class ReadStorage {
@@ -12,20 +15,20 @@ public class ReadStorage {
       public File root;
       public ArrayList<File>fileList=new ArrayList<>(2);
 
-      public ArrayList<File> imageFromExternal(){
+      public void imageFromExternal(){
 
           //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS); for a specific directory
           // before using external check that external storage is present or not
           root= new File(Environment.getExternalStorageDirectory().getAbsolutePath());
 
-          return getFile(root);
+          getFile(root);
 
       }
 
 
-    public ArrayList<File> imageFromInternal(){
+    public void imageFromInternal(){
         root= new File(Environment.getDataDirectory().getAbsolutePath());
-        return getFile(root);
+        getFile(root);
 
     }
 
@@ -42,10 +45,13 @@ public class ReadStorage {
                     if (listFile[i].getName().endsWith(".png")
                             || listFile[i].getName().endsWith(".jpg")
                             || listFile[i].getName().endsWith(".jpeg")
-                            || listFile[i].getName().endsWith(".gif"))
+                            || listFile[i].getName().endsWith(".gif")
+                            || listFile[i].getName().endsWith(".JPG")
+                            || listFile[i].getName().endsWith(".JPEG")
+                            || listFile[i].getName().endsWith(".GIF"))
 
-                    {
-                        fileList.add(listFile[i]);
+                    {   File file=listFile[i];
+                        new Databook(Uri.fromFile(listFile[i]),listFile[i].getName());
                     }
                 }
 

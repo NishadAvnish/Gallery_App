@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gallery_app.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.myViewHolder myViewHolder, int i) {
-        myViewHolder.gridImage.setImageResource(arrayList.get(i).img);
+        Picasso.get().load(String.valueOf(arrayList.get(i).uri)).placeholder(R.drawable.activ).fit().into(myViewHolder.gridImage);
         myViewHolder.gridText.setText(arrayList.get(i).Name);
 
     }
