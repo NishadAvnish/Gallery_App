@@ -1,7 +1,6 @@
-package com.example.gallery_app;
+package com.example.gallery_app.Actvity;
 
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +11,7 @@ import android.widget.FrameLayout;
 
 import com.example.gallery_app.Fragment.ImageFragment;
 import com.example.gallery_app.Fragment.VideoFragment;
+import com.example.gallery_app.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 btmNav=findViewById(R.id.btmview);
                 frame=findViewById(R.id.frameLayout);
                 videoFrag=new VideoFragment();
-                imgFrag=new ImageFragment();
+                imgFrag= new ImageFragment();
 
              }
 

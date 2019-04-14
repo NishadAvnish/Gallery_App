@@ -1,9 +1,11 @@
-package com.example.gallery_app;
+package com.example.gallery_app.Actvity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.gallery_app.R;
 
 
 public class Splash_screen extends AppCompatActivity {

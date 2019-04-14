@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 
 import com.example.gallery_app.R;
 
-import java.util.zip.Inflater;
-
 public class VideoFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.video_fragment, container, false);
+        return inflater.inflate(R.layout.activity_video_fragment,container,false);
     }
 }
