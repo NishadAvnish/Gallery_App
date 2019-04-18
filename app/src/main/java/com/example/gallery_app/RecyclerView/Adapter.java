@@ -1,7 +1,10 @@
 package com.example.gallery_app.RecyclerView;
 
 import android.content.Context;
-import android.media.Image;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.gallery_app.R;
 import com.squareup.picasso.Picasso;
 
@@ -39,8 +43,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.myViewHolder myViewHolder, int i) {
-        Picasso.get().load(String.valueOf(arrayList.get(i).uri)).placeholder(R.drawable.activ).fit().into(myViewHolder.gridImage);
-        myViewHolder.gridText.setText(arrayList.get(i).Name);
+
+       // myViewHolder.gridText.setText(arrayList.get(i).getName());
+
+        Glide.with(context)
+                .load(arrayList.get(i).Path)
+                .centerCrop()
+                .placeholder(R.drawable.activ)
+                .into(myViewHolder.gridImage);
+
 
     }
 

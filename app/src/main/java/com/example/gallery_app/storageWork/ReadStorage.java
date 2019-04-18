@@ -15,13 +15,13 @@ public class ReadStorage {
       public File root;
       public ArrayList<File>fileList=new ArrayList<>(2);
 
-      public void imageFromExternal(){
+      public ArrayList<Databook> imageFromExternal(){
 
           //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS); for a specific directory
           // before using external check that external storage is present or not
           root= new File(Environment.getExternalStorageDirectory().getAbsolutePath());
 
-          getFile(root);
+          return getFile(root);
 
       }
 
@@ -32,8 +32,9 @@ public class ReadStorage {
 
     }
 
-    public ArrayList<File> getFile(File dir) {
+    public ArrayList<Databook> getFile(File dir) {
         File listFile[] = dir.listFiles();
+        ArrayList<Databook> arrayList=new ArrayList<>();
         if (listFile != null && listFile.length > 0) {
             for (int i = 0; i < listFile.length; i++) {
 
@@ -51,13 +52,14 @@ public class ReadStorage {
                             || listFile[i].getName().endsWith(".GIF"))
 
                     {   File file=listFile[i];
-                        new Databook(Uri.fromFile(listFile[i]),listFile[i].getName());
+
+                       // arrayList.add(new Databook(Uri.fromFile(listFile[i]),listFile[i].getName()));
                     }
                 }
 
             }
         }
-        return fileList;
+        return arrayList;
     }
 
 
