@@ -21,10 +21,10 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
     Integer flag;
-    ArrayList<Databook> arrayList=null;
+    ArrayList<String> arrayList=null;
     Context context;
 
-    public Adapter(Integer flag, ArrayList<Databook> arrayList, Context context) {
+    public Adapter(Integer flag, ArrayList<String> arrayList, Context context) {
         this.flag = flag;
         this.arrayList = arrayList;
         this.context = context;
@@ -44,13 +44,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull Adapter.myViewHolder myViewHolder, int i) {
 
-       // myViewHolder.gridText.setText(arrayList.get(i).getName());
+        myViewHolder.gridText.setText(arrayList.get(i));
 
-        Glide.with(context)
-                .load(arrayList.get(i).Path)
+       /* Glide.with(context)
+                .load(arrayList.get(i).path)
                 .centerCrop()
                 .placeholder(R.drawable.activ)
-                .into(myViewHolder.gridImage);
+                .into(myViewHolder.gridImage);*/
 
 
     }
@@ -66,7 +66,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
         TextView gridText;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            gridImage=itemView.findViewById(R.id.gridImage);
+           // gridImage=itemView.findViewById(R.id.gridImage);
             gridText=itemView.findViewById(R.id.gridText);
 
         }

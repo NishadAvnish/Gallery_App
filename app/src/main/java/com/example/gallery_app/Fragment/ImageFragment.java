@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,16 +18,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.gallery_app.R;
 import com.example.gallery_app.RecyclerView.Adapter;
 import com.example.gallery_app.RecyclerView.Databook;
+import com.example.gallery_app.storageWork.IMAGE_n_FOLDER;
 import com.example.gallery_app.storageWork.ReadStorage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static android.view.View.inflate;
 import static android.widget.GridLayout.HORIZONTAL;
 
 public class ImageFragment extends Fragment {
@@ -46,80 +50,28 @@ public class ImageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView= (RecyclerView) view.findViewById(R.id.imageRecyclerView);
+        recyclerView= view.findViewById(R.id.imageRecyclerView);
 
-
-
-        gridLayoutManager=new GridLayoutManager(getContext(),3);
+       /* View v= getLayoutInflater().inflate(R.layout.fragmnet_image_inflaterecycler, null);
+        CardView cardView=v.findViewById(R.id.cardview);
+        int viewWidth = recyclerView.getMeasuredWidth();
+        float cardViewWidth = getActivity().getResources().getDimension(R.dimen.cardView);
+        int newSpanCount = (int) Math.floor(viewWidth / cardViewWidth);
+*/
+        gridLayoutManager=new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
         //Adapter=new Adapter(1,getFile(new File(Environment.getExternalStorageDirectory().getAbsolutePath())),getContext());
-        Adapter=new Adapter(1,getAllShownImagesPath(),getContext());
+        IMAGE_n_FOLDER image_n_folder= new IMAGE_n_FOLDER();
+        image_n_folder.getImageFolderMap(getContext());
+
+        Adapter=new Adapter(1,image_n_folder.folderNameList,getContext());
         recyclerView.setAdapter(Adapter);
-        DividerItemDecoration dividerItemDecoration= new DividerItemDecoration(getContext(),HORIZONTAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        /*DividerItemDecoration dividerItemDecoration= new DividerItemDecoration(getContext(),HORIZONTAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);*/
 
 
 
 
     }
 
-    private ArrayList<Databook> getAllShownImagesPath() {
-        Uri uri;
-        Cursor cursor;
-        int column_index_data, column_index_folder_name;
-        ArrayList<Databook> listOfAllImages = new ArrayList<Databook>();
-        String absolutePathOfImage = null;
-        uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-
-        String[] projection = {MediaStore.MediaColumns.DATA,
-                MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
-
-        cursor = getContext().getContentResolver().query(uri, projection, null,
-                null, null);
-
-        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-        column_index_folder_name = cursor
-                .getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
-        while (cursor.moveToNext()) {
-            absolutePathOfImage = cursor.getString(column_index_data);
-            Log.i("TAG",absolutePathOfImage.getClass().getName());
-
-            listOfAllImages.add(new Databook(absolutePathOfImage));
-        }
-        cursor.close();
-        return listOfAllImages;
-    }
-
-
-   /* public ArrayList<Databook> getFile(File dir) {
-        File listFile[] = dir.listFiles();
-        ArrayList<Databook> arrayList=new ArrayList<>();
-        if (listFile != null && listFile.length > 0) {
-            for (int i = 0; i < listFile.length; i++) {
-
-                if (listFile[i].isDirectory()) {
-                    //fileList.add(listFile[i]);
-                    getFile(listFile[i]);
-
-                } else {
-                    if (listFile[i].getName().endsWith(".png")
-                            || listFile[i].getName().endsWith(".jpg")
-                            || listFile[i].getName().endsWith(".jpeg")
-                            || listFile[i].getName().endsWith(".gif")
-                            || listFile[i].getName().endsWith(".JPG")
-                            || listFile[i].getName().endsWith(".JPEG")
-                            || listFile[i].getName().endsWith(".GIF"))
-
-                    {   File file=listFile[i];
-                            arrayList.add(new Databook(listFile[i].getAbsolutePath()));
-                            Log.i("TAG",(listFile[i].getAbsolutePath()).getClass().getName());
-
-
-                    }
-                }
-
-            }
-        }
-        return arrayList;
-    }*/
 }
